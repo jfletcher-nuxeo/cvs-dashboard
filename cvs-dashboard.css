@@ -47,23 +47,30 @@ iron-icon {
   position: relative;
 }
 
-.colorRed {
+.dashboard-widget-header-01 {
   --paper-card-header: {
-    background: #CC0000;
+    background: #ffe5de;
   }
-  --paper-card-header-color: #ffffff;
+  --paper-card-header-color: #000000;
 }
 
-.colorTeal {
+.dashboard-widget-header-02 {
   --paper-card-header: {
-    background: #007A7A;
+    background: #d0e8fc;
   }
-  --paper-card-header-color: #ffffff;
+  --paper-card-header-color: #000000;
 }
 
-.colorGreen {
+.dashboard-widget-header-03 {
   --paper-card-header: {
-    background: #7FBE00;
+    background: #d9eeda;
   }
-  --paper-card-header-color: #ffffff;
+  --paper-card-header-color: #000000;
+}
+
+.dashboard-widget-header-04 {
+  --paper-card-header: {
+    background: #ffe9c9;
+  }
+  --paper-card-header-color: #000000;
 }
