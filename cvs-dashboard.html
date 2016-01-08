@@ -55,7 +55,7 @@ Example:
     </paper-card>
 
 
-    <!-- Article Categories -->
+    <!-- Article Categories --------------------------------------------------->
     <nuxeo-repository-data ecm-primary-type="Article" where='[{"term": {"ecm:isVersion": "false"}}]' grouped-by="article:category" data="{{articleCategories}}">
     </nuxeo-repository-data>
 
@@ -67,13 +67,13 @@ Example:
     </paper-card>
 
 
-    <!-- Article Regions -->
+    <!-- Article Regions --------------------------------------------------->
     <nuxeo-repository-data ecm-primary-type="Article" where='[{"term": {"ecm:isVersion": "false"}}]' grouped-by="article:region" data="{{articleRegions}}">
     </nuxeo-repository-data>
 
     <paper-card class="colorTeal" heading="Article Regions" elevation="2">
       <div class="card-content">
-        <google-chart class="center-chart" type="bar" data="[[_data(articleRegions)]]">
+        <google-chart class="center-chart" type="bar" data="[[_googleChartData(articleRegions)]]" options="[[_hideLegend()]]">
         </google-chart>
       </div>
     </paper-card>
@@ -88,7 +88,7 @@ Example:
          "Video", and "File". But I can't do that the way nuxeo-repository-data
          is implemented because it only does a single "must" predicate; it's
          an AND for all terms. -->
-    <nuxeo-repository-data grouped-by="dc:lastContributor" data="{{topContributors}}" start-date="[[startDate]]" end-date="[[endDate]]">
+    <nuxeo-repository-data ecm-primary-type="Article" grouped-by="dc:lastContributor" data="{{topContributors}}" start-date="[[startDate]]" end-date="[[endDate]]">
     </nuxeo-repository-data>
 
     <paper-card class="colorTeal" heading="Top Contributors" elevation="2">
@@ -206,7 +206,39 @@ Example:
       endDate: String
     },
 
+    _hideLegend: function () {
+      return {
+
+        legend: 'none',
+
+      }
+    },
+
     // Transform our data for usage with Google Charts
+
+    _googleChartData: function (nuxeoData) {
+      var result = nuxeoData.map(function (e) {
+        return [e.key, e.value];
+      });
+
+      var series = nuxeoData.map(function (e) {
+        return e.key;
+      });
+
+      series.splice(0, 0, "Region");
+      result.splice(0, 0, ["Region", "Value"]);
+
+
+
+      return [
+        ["Regions", "Region", {
+          role: 'style'
+        }],
+        ["two", 10, "red"],
+        ["three", 20, "blue"],
+        ["one", 5, "green"],
+      ];
+    },
 
     _data: function (nuxeoData) {
       var result = nuxeoData.map(function (e) {
