@@ -172,7 +172,7 @@ Example:
     <nuxeo-workflow-data workflow="SerialDocumentReview" event="afterWorkflowStarted" grouped-by="workflowInitiator" start-date="[[startDate]]" end-date="[[endDate]]" data="{{initiators_SerialDocumentReview}}">
     </nuxeo-workflow-data>
 
-    <paper-card class="dashboard-widget-header-04" heading="Serial Review Initiator" elevation="2">
+    <paper-card class="dashboard-widget-header-02" heading="Serial Review Initiator" elevation="2">
       <div class="card-content">
         <google-chart type="pie" cols='[{"label": "User", "type": "string"},{"label": "Value", "type": "number"}]' rows="[[_rows(initiators_SerialDocumentReview)]]">
         </google-chart>
@@ -183,13 +183,12 @@ Example:
     <nuxeo-workflow-data workflow="SerialDocumentReview" event="afterWorkflowFinish" metrics="avg(timeSinceWfStarted)" start-date="[[startDate]]" end-date="[[endDate]]" data="{{avgWorkflowLength_SerialDocumentReview}}">
     </nuxeo-workflow-data>
 
-    <paper-card class="dashboard-widget-header-01" heading="Avg. Serial Review Duration" elevation="2">
+    <paper-card class="dashboard-widget-header-03" heading="Avg. Serial Review Duration" elevation="2">
       <div class="card-content">
         <iron-icon icon="image:timer"></iron-icon>
         <span class="workflow-length-label">[[_asDuration(avgWorkflowLength_SerialDocumentReview)]]</span>
       </div>
     </paper-card>
-
 
   </template>
 
