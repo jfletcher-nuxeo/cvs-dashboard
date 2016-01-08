@@ -38,25 +38,26 @@ Contributors:
     }
     
     #title {
-      color: white;
-      font-size: 140%;
+      color: #CC0000;
+      font-size: 175%;
+      font-weight: bold;
       display: table;
       margin: 0 auto;
     }
     
     #logo {
-      background: transparent url('http://172.28.255.39:8080/nuxeo/img/cvs-logo.png') no-repeat;
+      background: transparent url('images/cvscaremarklogo.png') no-repeat;
       background-size: cover;
       display: inline-block;
       height: 38px;
-      width: 157px;
+      width: 291px;
       ;
     }
     
     #dateRange {}
     
     paper-toolbar {
-      --paper-toolbar-background: #4c4c4c;
+      --paper-toolbar-background: #e4e4e4;
     }
   </style>
 
@@ -67,7 +68,7 @@ Contributors:
   <template is="dom-bind" id="app">
 
     <!-- Define a connection to our Nuxeo server -->
-    <nuxeo-connection url="http://172.28.255.39:8080/nuxeo" username="Administrator" password="Administrator"></nuxeo-connection>
+    <nuxeo-connection url="http://cvs.cloud.nuxeo.com/nuxeo" username="Administrator" password="Administrator"></nuxeo-connection>
 
     <paper-header-panel>
       <paper-toolbar>
