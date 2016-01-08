@@ -54,7 +54,13 @@ Contributors:
       ;
     }
     
-    #dateRange {}
+    #hideDateRange {
+      display: none;
+    }
+    
+    #placeholder {
+      width: 280px;
+    }
     
     paper-toolbar {
       --paper-toolbar-background: #f9f9f9;
@@ -74,13 +80,12 @@ Contributors:
       <paper-toolbar>
         <div id="logo"></div>
         <div id="title">CVS Dashboard</div>
-        <div id="dateRange">
+        <div id="hideDateRange">
           <input type="date" value="{{startDate::change}}">
           <input type="date" value="{{endDate::change}}">
         </div>
+        <div id="placeholder"></div>
       </paper-toolbar>
-
-
 
       <!-- Include our element and specify a start and end date -->
       <cvs-dashboard start-date="[[startDate]]" end-date="[[endDate]]">
