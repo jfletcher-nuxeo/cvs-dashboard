@@ -1,24 +1,33 @@
-# Nuxeo CVS Dashboard Parent Project
+# About CVS Dashboard Plugin
 
-This repository is for building the Plugin and Marketplace package for the CVS Dashboard.
+This Nuxeo plugin uses [Nuxeo Data Visualzation](https://doc.nuxeo.com/x/WZCRAQ) to create a dashboard for the CVS demo.
 
-This sample uses [Nuxeo Data Visualzation](https://doc.nuxeo.com/x/WZCRAQ) to present a dashboard for the CVS demo.
+# Requirements
+
+See [CORG/Compiling Nuxeo from sources](http://doc.nuxeo.com/x/xION)
+
+Building this sample requires the following software:
+
+- [Node.js] (http://nodejs.org)
+- [Bower] (http://bower.io)
 
 # Building
 
-Then navigate into the root folder for this project and run:
+Navigate into the folder that contains `pom.xml`.
 
     mvn clean install
 
-The Marketplace package will be placed in the `cvs-dashboard-mp/target` folder.
+The plugin will be placed in the `target` folder.
 
 # Deploying
 
-You may deploy the zip using `nuxeoctl` or the Nuxeo Admin Center.
+It is recommended to deploy the marketplace package. But the plug-in may be installed directly as well. 
+
+Copy JAR file into `$NUXEO_HOME/nxserver/plugins/`.
 
 # Usage
 
-Once installed in the CVS demo, the dashboard is available at `http://yourserver/nuxeo/cvs-dashboard/`.
+Once installed in the CVS demo, there is a bundled Web application at `http://yourserver/nuxeo/cvs-dashboard`.
 
 # Resources
 

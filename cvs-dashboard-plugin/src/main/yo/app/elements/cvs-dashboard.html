@@ -14,13 +14,13 @@ Lesser General Public License for more details.
 Contributors:
   Josh Fletcher <jfletcher@nuxeo.com>
 -->
-<link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../paper-card/paper-card.html">
-<link rel="import" href="../iron-icons/image-icons.html">
-<link rel="import" href="../google-chart/google-chart.html">
-<link rel="import" href="../nuxeo-dataviz-elements/nuxeo-dataviz-elements.html">
-<link rel="import" href="../nuxeo-dataviz-elements/nuxeo-audit-data.html">
-<link rel="import" href="../nuxeo-util-mimetypes/nuxeo-util-mimetypes.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../bower_components/iron-icons/image-icons.html">
+<link rel="import" href="../bower_components/google-chart/google-chart.html">
+<link rel="import" href="../bower_components/nuxeo-dataviz-elements/nuxeo-dataviz-elements.html">
+<link rel="import" href="../bower_components/nuxeo-dataviz-elements/nuxeo-audit-data.html">
+<link rel="import" href="../bower_components/nuxeo-util-mimetypes/nuxeo-util-mimetypes.html">
 <link rel="import" href="nuxeo-dam-dashboard-downloads-table.html">
 <!--
 An element providing a dashboard for the CVS demo.
@@ -44,7 +44,7 @@ Example:
 
     <!-- Top articles --------------------------------------------------->
     <!-- Get audit data -->
-    <nuxeo-audit-data event-id="download" where='[{"term": {"downloadReason": "download"}},{"term": {"blobXPath": "blobholder:0"}}]' grouped-by="docUUID" group-limit="[[7]]" start-date="[[startDate]]" end-date="[[endDate]]" data="{{downloads}}">
+    <nuxeo-audit-data event-id="download" grouped-by="docUUID" group-limit="[[7]]" start-date="[[startDate]]" end-date="[[endDate]]" data="{{downloads}}">
     </nuxeo-audit-data>
 
     <paper-card class="dashboard-widget-header-01" heading="Top Articles" elevation="2">

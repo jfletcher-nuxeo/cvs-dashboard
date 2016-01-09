@@ -1,30 +1,32 @@
-# Nuxeo CVS Dashboard Parent Project
+# About cvs-dashboard
 
-This repository is for building the Plugin and Marketplace package for the CVS Dashboard.
+An element providing a Dashboard for the CVS demo.
 
-This sample uses [Nuxeo Data Visualzation](https://doc.nuxeo.com/x/WZCRAQ) to present a dashboard for the CVS demo.
+# Requiments
 
-# Building
+Install Node.js (I use [Homebrew](http://brew.sh/)).
 
-Then navigate into the root folder for this project and run:
+Navigate to the folder containing the dashboard in shell/terminal and then:
 
-    mvn clean install
+    npm install -g bower
 
-The Marketplace package will be placed in the `cvs-dashboard-mp/target` folder.
+# Dependencies
 
-# Deploying
+Download the element's dependencies:
 
-You may deploy the zip using `nuxeoctl` or the Nuxeo Admin Center.
+    bower install
 
 # Usage
 
-Once installed in the CVS demo, the dashboard is available at `http://yourserver/nuxeo/cvs-dashboard/`.
+Install [Polyserve](https://github.com/PolymerLabs/polyserve):
 
-# Resources
+    npm install -g polyserve
 
-## Reporting issues
+Run it via:
 
-Contact [jfletcher@nuxeo.com](mailto:jfletcher@nuxeo.com)
+    polyserve -p 3000
+
+Once running, you can checkout the demo at `http://localhost:3000/components/cvs-dashboard/demo/index.html`.
 
 # Licensing
 

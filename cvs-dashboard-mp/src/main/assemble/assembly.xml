@@ -1,0 +1,27 @@
+<project name="cvs-dashboard-assembly" default="build" xmlns:nx="urn:nuxeo-build" xmlns:artifact="urn:nuxeo-artifact">
+  <taskdef resource="org/nuxeo/build/antlib.xml" uri="urn:nuxeo-build" />
+  <taskdef resource="org/nuxeo/build/artifact/antlib.xml" uri="urn:nuxeo-artifact" />
+
+  <property name="outdir" value="${maven.project.build.directory}" />
+
+  <target name="build" description="Build CVS Dashboard Nuxeo Package">
+    <tstamp />
+    <delete failonerror="false" dir="${outdir}/cvs-dashboard-mp" />
+    <mkdir dir="${outdir}/cvs-dashboard-mp" />
+    <copy todir="${outdir}/cvs-dashboard-mp">
+      <fileset dir="src/main/resources" />
+      <filterset>
+        <filter token="VERSION" value="${maven.project.version}" />
+        <filter token="DISTRIB_VERSION" value="${nuxeo.distribution.version}" />
+      </filterset>
+    </copy>
+
+    <copy todir="${outdir}/cvs-dashboard-mp/install/bundles">
+      <artifact:file key="org.nuxeo.cvs.demo:cvs-dashboard-plugin" />
+    </copy>
+
+    <zip destfile="${outdir}/${maven.project.artifactId}-${maven.project.version}.zip" basedir="${outdir}/cvs-dashboard-mp" />
+    <artifact:attach file="${outdir}/${maven.project.artifactId}-${maven.project.version}.zip" type="zip" />
+  </target>
+
+</project>
