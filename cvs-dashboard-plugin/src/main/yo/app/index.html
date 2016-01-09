@@ -21,14 +21,17 @@ Contributors:
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <title>CVS Dashboard</title>
 
-  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-  <script src="../../moment/min/moment-with-locales.js"></script>
+  <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <!-- endbuild -->
 
-  <link rel="import" href="../../nuxeo-elements/nuxeo-connection.html">
-  <link rel="import" href="../../paper-header-panel/paper-header-panel.html">
-  <link rel="import" href="../../paper-toolbar/paper-toolbar.html">
+  <!-- build:js vendor/moment.js -->
+  <script src="bower_components/moment/min/moment-with-locales.js"></script>
+  <!-- endbuild-->
 
-  <link rel="import" href="../cvs-dashboard.html">
+  <!-- build:vulcanized elements/elements.vulcanized.html -->
+  <link rel="import" href="elements/elements.html">
+  <!-- endbuild-->
 
   <style is="custom-style">
     body {

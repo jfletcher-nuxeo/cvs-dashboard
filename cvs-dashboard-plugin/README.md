@@ -1,20 +1,31 @@
-# Nuxeo Case Management Workflow Dashboards Parent Project
+# About Nuxeo Case Management Workflow Dashboards Plugin
 
-This repository is for building the Plugin and Marketplace package for the Case Management Workflow Dashboards.
+This Nuxeo plugin uses [Nuxeo Data Visualzation](https://doc.nuxeo.com/x/WZCRAQ) to create dashboards for the Nuxeo Case Management Showcase.
 
-This sample uses [Nuxeo Data Visualzation](https://doc.nuxeo.com/x/WZCRAQ) to present a dashboard for each Case Management Workflow.
+It depends on the [cm-workflow-dashboards-elements](https://github.com/nuxeo-sandbox/cm-workflow-dashboards-elements) Polymer component.
+
+# Requirements
+
+See [CORG/Compiling Nuxeo from sources](http://doc.nuxeo.com/x/xION)
+
+Building this sample requires the following software:
+
+- [Node.js] (http://nodejs.org)
+- [Bower] (http://bower.io)
 
 # Building
 
-Then navigate into the root folder for this project and run:
+Navigate into the folder that contains `pom.xml`.
 
     mvn clean install
 
-The Marketplace package will be placed in the `cm-workflow-dashboards-mp/target` folder.
+The plugin will be placed in the `target` folder.
 
 # Deploying
 
-You may deploy the zip using `nuxeoctl` or the Nuxeo Admin Center.
+It is recommended to deploy the marketplace package. But the plug-in may be installed directly as well. 
+
+Copy JAR file into `$NUXEO_HOME/nxserver/plugins/`.
 
 # Usage
 
