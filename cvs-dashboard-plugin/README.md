@@ -1,8 +1,6 @@
-# About Nuxeo Case Management Workflow Dashboards Plugin
+# About CVS Dashboard Plugin
 
-This Nuxeo plugin uses [Nuxeo Data Visualzation](https://doc.nuxeo.com/x/WZCRAQ) to create dashboards for the Nuxeo Case Management Showcase.
-
-It depends on the [cm-workflow-dashboards-elements](https://github.com/nuxeo-sandbox/cm-workflow-dashboards-elements) Polymer component.
+This Nuxeo plugin uses [Nuxeo Data Visualzation](https://doc.nuxeo.com/x/WZCRAQ) to create a dashboard for the CVS demo.
 
 # Requirements
 
@@ -29,9 +27,7 @@ Copy JAR file into `$NUXEO_HOME/nxserver/plugins/`.
 
 # Usage
 
-Once installed in the Case Manangement Showcase, these dashboards are available under ADMIN | Workflow.
-
-There is also a bundled Web application for testing at `http://yourserver/nuxeo/cm-workflow-dashboards`.
+Once installed in the CVS demo, there is a bundled Web application at `http://yourserver/nuxeo/cvs-dashboard`.
 
 # Resources
 
