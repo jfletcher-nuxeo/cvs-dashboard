@@ -3,7 +3,7 @@
 
     <startURLPattern>
       <patterns>
-        <pattern>cm-workflow-dashboards/</pattern>
+        <pattern>cvs-dashboard/</pattern>
       </patterns>
     </startURLPattern>
 

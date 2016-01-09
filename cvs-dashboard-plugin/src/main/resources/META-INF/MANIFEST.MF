@@ -1,7 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 1
-Bundle-Name: Nuxeo Case Management Workflow Dashboards
-Bundle-SymbolicName: org.nuxeo.cm.demo.cm-workflow-dashboards-plugin;singleton:=true
+Bundle-Name: CVS Dashboard
+Bundle-SymbolicName: org.nuxeo.CVS.demo.cvs-dashboard-plugin;singleton:=true
 Bundle-Vendor: Nuxeo
 Bundle-Version: 1.0.0
-Nuxeo-Component: OSGI-INF/actions-contrib.xml
+Nuxeo-RequiredBy: org.nuxeo.ecm.war
+Nuxeo-Component: OSGI-INF/authentication-contrib.xml
