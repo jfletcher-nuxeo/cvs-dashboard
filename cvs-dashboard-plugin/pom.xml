@@ -4,12 +4,12 @@
   <parent>
     <groupId>org.nuxeo.cm.demo</groupId>
     <version>1.0.0-SNAPSHOT</version>
-    <artifactId>workflow-dashboards-parent</artifactId>
+    <artifactId>cvs-dashboard-parent</artifactId>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
   <groupId>org.nuxeo.cm.demo</groupId>
-  <artifactId>cm-workflow-dashboards-plugin</artifactId>
+  <artifactId>cvs-dashboard-plugin</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <name>Plugin for Nuxeo Case Management Workflow Dashboards</name>
   <description>Plugin Nuxeo Case Management Workflow Dashboards</description>
@@ -61,8 +61,8 @@
   </repositories>
 
   <scm>
-    <connection>scm:git:git://github.com/nuxeo-sandbox/cm-workflow-dashboards-plugin.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com:nuxeo-sandbox/cm-workflow-dashboards-plugin.git</developerConnection>
-    <url>https://github.com/nuxeo-sandbox/cm-workflow-dashboards-plugin</url>
+    <connection>scm:git:git://github.com/jfletcher-nuxeo/cvs-dashboard-plugin.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com:jfletcher-nuxeo/cvs-dashboard-plugin.git</developerConnection>
+    <url>https://github.com/jfletcher-nuxeo/cvs-dashboard-plugin</url>
   </scm>
 </project>

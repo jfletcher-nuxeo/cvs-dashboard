@@ -3,30 +3,30 @@
   <parent>
     <groupId>org.nuxeo.ecm.distribution</groupId>
     <artifactId>nuxeo-distribution</artifactId>
-    <version>7.10-SNAPSHOT</version>
+    <version>8.1-SNAPSHOT</version>
   </parent>
 
-  <groupId>org.nuxeo.cm.demo</groupId>
-  <artifactId>workflow-dashboards-parent</artifactId>
+  <groupId>org.nuxeo.cvs.demo</groupId>
+  <artifactId>cvs-dashboard-parent</artifactId>
   <version>1.0.0-SNAPSHOT</version>
-  <name>Parent Project for Case Management Workflow Dashboards</name>
+  <name>Parent Project for CVS Dashboard</name>
   <packaging>pom</packaging>
 
   <modules>
-    <module>cm-workflow-dashboards-plugin</module>
-    <module>cm-workflow-dashboards-mp</module>
+    <module>cvs-dashboard-plugin</module>
+    <module>cvs-dashboard-mp</module>
   </modules>
 
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>org.nuxeo.cm.demo</groupId>
-        <artifactId>cm-workflow-dashboards-plugin</artifactId>
+        <groupId>org.nuxeo.cvs.demo</groupId>
+        <artifactId>cvs-dashboard-plugin</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.nuxeo.cm.demo</groupId>
-        <artifactId>cm-workflow-dashboards-mp</artifactId>
+        <groupId>org.nuxeo.cvs.demo</groupId>
+        <artifactId>cvs-dashboard-mp</artifactId>
         <version>${project.version}</version>
         <type>zip</type>
       </dependency>

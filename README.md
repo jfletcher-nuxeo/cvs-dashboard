@@ -1,8 +1,8 @@
-# Nuxeo Case Management Workflow Dashboards Parent Project
+# Nuxeo CVS Dashboard Parent Project
 
-This repository is for building the Plugin and Marketplace package for the Case Management Workflow Dashboards.
+This repository is for building the Plugin and Marketplace package for the CVS Dashboard.
 
-This sample uses [Nuxeo Data Visualzation](https://doc.nuxeo.com/x/WZCRAQ) to present a dashboard for each Case Management Workflow.
+This sample uses [Nuxeo Data Visualzation](https://doc.nuxeo.com/x/WZCRAQ) to present a dashboard for the CVS demo.
 
 # Building
 
@@ -10,7 +10,7 @@ Then navigate into the root folder for this project and run:
 
     mvn clean install
 
-The Marketplace package will be placed in the `cm-workflow-dashboards-mp/target` folder.
+The Marketplace package will be placed in the `cvs-dashboard-mp/target` folder.
 
 # Deploying
 
@@ -18,9 +18,7 @@ You may deploy the zip using `nuxeoctl` or the Nuxeo Admin Center.
 
 # Usage
 
-Once installed in the Case Manangement Showcase, these dashboards are available under ADMIN | Workflow.
-
-There is also a bundled Web application for testing at `http://yourserver/nuxeo/cm-workflow-dashboards`.
+Once installed in the CVS demo, the dashboard is available at `http://yourserver/nuxeo/cvs-dashboard/`.
 
 # Resources
 
