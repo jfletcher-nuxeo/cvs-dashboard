@@ -59,7 +59,7 @@ Example:
     <nuxeo-repository-data ecm-primary-type="Article" where='[{"term": {"ecm:isVersion": "false"}}]' grouped-by="article:category" data="{{articleCategories}}">
     </nuxeo-repository-data>
 
-    <paper-card class="dashboard-widget-header-02" heading="Article Categories" elevation="2">
+    <paper-card class="dashboard-widget-header-01" heading="Article Categories" elevation="2">
       <div class="card-content">
         <google-chart class="center-chart" type="pie" cols='[{"label": "Category", "type": "string"},{"label": "Value", "type": "number"}]' rows="[[_rows(articleCategories)]]">
         </google-chart>
@@ -71,7 +71,7 @@ Example:
     <nuxeo-repository-data ecm-primary-type="Article" where='[{"term": {"ecm:isVersion": "false"}}]' grouped-by="article:region" data="{{articleRegions}}">
     </nuxeo-repository-data>
 
-    <paper-card class="dashboard-widget-header-03" heading="Articles per Region" elevation="2">
+    <paper-card class="dashboard-widget-header-01" heading="Articles per Region" elevation="2">
       <div class="card-content">
         <google-chart class="center-chart" type="bar" data="[[_coloredBarChartData(articleRegions)]]" options="[[_hideLegend()]]">
         </google-chart>
@@ -91,7 +91,7 @@ Example:
     <nuxeo-repository-data grouped-by="dc:lastContributor" data="{{topContributors}}" start-date="[[startDate]]" end-date="[[endDate]]">
     </nuxeo-repository-data>
 
-    <paper-card class="dashboard-widget-header-04" heading="Top Contributors" elevation="2">
+    <paper-card class="dashboard-widget-header-02" heading="Top Contributors" elevation="2">
       <div class="card-content">
         <google-chart class="center-chart" type='treemap' options='{"maxPostDepth":2}' data="[[_treeFor(topContributors)]]">
         </google-chart>
@@ -106,7 +106,7 @@ Example:
     <!-- Pictures -->
     <nuxeo-repository-data ecm-primary-type="Picture" where='[{"term": {"ecm:isVersion": "false"}}]' grouped-by="picture:info.format" data="{{pictureTypes}}">
     </nuxeo-repository-data>
-    <paper-card class="dashboard-widget-header-01" heading="Picture Types" elevation="2">
+    <paper-card class="dashboard-widget-header-03" heading="Picture Types" elevation="2">
       <div class="card-content">
         <google-chart class="center-chart" type="column" data="[[_coloredBarChartData(pictureTypes)]]" options="[[_hideLegend()]]">
         </google-chart>
@@ -122,7 +122,7 @@ Example:
     <nuxeo-repository-data ecm-primary-type="Video" where='[{"term": {"ecm:isVersion": "false"}}]' grouped-by="file:content.mime-type" data="{{videoTypes}}">
     </nuxeo-repository-data>
 
-    <paper-card class="dashboard-widget-header-02" heading="Video Types" elevation="2">
+    <paper-card class="dashboard-widget-header-03" heading="Video Types" elevation="2">
       <div class="card-content">
         <google-chart class="center-chart" type="pie" cols='[{"label": "Type", "type": "string"},{"label": "Value", "type": "number"}]' rows="[[_prettyRows(videoTypes)]]">
         </google-chart>
@@ -157,7 +157,7 @@ Example:
     <nuxeo-workflow-data workflow="AcknowledgeRead" event="afterWorkflowFinish" metrics="avg(timeSinceWfStarted)" start-date="[[startDate]]" end-date="[[endDate]]" data="{{avgWorkflowLength_AcknowledgeRead}}">
     </nuxeo-workflow-data>
 
-    <paper-card class="dashboard-widget-header-01" heading="Avg. Acknowledge Read Duration" elevation="2">
+    <paper-card class="dashboard-widget-header-04" heading="Avg. Acknowledge Read Duration" elevation="2">
       <div class="card-content">
         <iron-icon icon="image:timer"></iron-icon>
         <span class="workflow-length-label">[[_asDuration(avgWorkflowLength_AcknowledgeRead)]]</span>
@@ -170,7 +170,7 @@ Example:
     <nuxeo-workflow-data workflow="SerialDocumentReview" event="afterWorkflowStarted" grouped-by="workflowInitiator" start-date="[[startDate]]" end-date="[[endDate]]" data="{{initiators_SerialDocumentReview}}">
     </nuxeo-workflow-data>
 
-    <paper-card class="dashboard-widget-header-02" heading="Serial Review Initiator" elevation="2">
+    <paper-card class="dashboard-widget-header-04" heading="Serial Review Initiator" elevation="2">
       <div class="card-content">
         <google-chart type="pie" cols='[{"label": "User", "type": "string"},{"label": "Value", "type": "number"}]' rows="[[_rows(initiators_SerialDocumentReview)]]">
         </google-chart>
@@ -181,7 +181,7 @@ Example:
     <nuxeo-workflow-data workflow="SerialDocumentReview" event="afterWorkflowFinish" metrics="avg(timeSinceWfStarted)" start-date="[[startDate]]" end-date="[[endDate]]" data="{{avgWorkflowLength_SerialDocumentReview}}">
     </nuxeo-workflow-data>
 
-    <paper-card class="dashboard-widget-header-03" heading="Avg. Serial Review Duration" elevation="2">
+    <paper-card class="dashboard-widget-header-04" heading="Avg. Serial Review Duration" elevation="2">
       <div class="card-content">
         <iron-icon icon="image:timer"></iron-icon>
         <span class="workflow-length-label">[[_asDuration(avgWorkflowLength_SerialDocumentReview)]]</span>
