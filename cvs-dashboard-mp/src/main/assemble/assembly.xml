@@ -17,7 +17,7 @@
     </copy>
 
     <copy todir="${outdir}/cvs-dashboard-mp/install/bundles">
-      <artifact:file key="org.nuxeo.cm.demo:cvs-dashboard-plugin" />
+      <artifact:file key="org.nuxeo.cvs.demo:cvs-dashboard-plugin" />
     </copy>
 
     <zip destfile="${outdir}/${maven.project.artifactId}-${maven.project.version}.zip" basedir="${outdir}/cvs-dashboard-mp" />
