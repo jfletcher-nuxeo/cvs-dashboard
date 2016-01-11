@@ -22,7 +22,7 @@ Contributors:
 <link rel="import" href="../bower_components/nuxeo-dataviz-elements/nuxeo-audit-data.html">
 <link rel="import" href="../bower_components/nuxeo-dataviz-elements/nuxeo-search-data.html">
 <link rel="import" href="../bower_components/nuxeo-util-mimetypes/nuxeo-util-mimetypes.html">
-<link rel="import" href="nuxeo-dam-dashboard-downloads-table.html">
+<link rel="import" href="nuxeo-data-table-audit.html">
 <!--
 An element providing a dashboard for the CVS demo.
 
@@ -51,8 +51,8 @@ Example:
 
     <paper-card class="dashboard-widget-header-01" heading="Top Downloads" elevation="2">
       <div class="card-content-table">
-        <nuxeo-dam-dashboard-downloads-table columns='[{"key": "key", "title": "Article"}, {"key": "value", "title": "Downloads"}]' data="[[_table(downloads)]]">
-        </nuxeo-dam-dashboard-downloads-table>
+        <nuxeo-data-table-audit columns='[{"key": "key", "title": "Article"}, {"key": "value", "title": "Downloads"}]' data="[[_table(downloads)]]">
+        </nuxeo-data-table-audit>
       </div>
     </paper-card>
 
