@@ -20,6 +20,7 @@ Contributors:
 <link rel="import" href="../bower_components/google-chart/google-chart.html">
 <link rel="import" href="../bower_components/nuxeo-dataviz-elements/nuxeo-dataviz-elements.html">
 <link rel="import" href="../bower_components/nuxeo-dataviz-elements/nuxeo-audit-data.html">
+<link rel="import" href="../bower_components/nuxeo-dataviz-elements/nuxeo-search-data.html">
 <link rel="import" href="../bower_components/nuxeo-util-mimetypes/nuxeo-util-mimetypes.html">
 <link rel="import" href="nuxeo-dam-dashboard-downloads-table.html">
 <!--
@@ -42,12 +43,13 @@ Example:
 
   <template>
 
-    <!-- Top articles --------------------------------------------------->
+
+    <!-- Top Downloads --------------------------------------------------->
     <!-- Get audit data -->
-    <nuxeo-audit-data event-id="download" grouped-by="docUUID" group-limit="[[7]]" start-date="[[startDate]]" end-date="[[endDate]]" data="{{downloads}}">
+    <nuxeo-audit-data event-id="download" grouped-by="docUUID" group-limit="7" start-date="[[startDate]]" end-date="[[endDate]]" data="{{downloads}}">
     </nuxeo-audit-data>
 
-    <paper-card class="dashboard-widget-header-01" heading="Top Articles" elevation="2">
+    <paper-card class="dashboard-widget-header-01" heading="Top Downloads" elevation="2">
       <div class="card-content-table">
         <nuxeo-dam-dashboard-downloads-table columns='[{"key": "key", "title": "Article"}, {"key": "value", "title": "Downloads"}]' data="[[_table(downloads)]]">
         </nuxeo-dam-dashboard-downloads-table>
@@ -73,7 +75,7 @@ Example:
 
     <paper-card class="dashboard-widget-header-01" heading="Articles per Region" elevation="2">
       <div class="card-content">
-        <google-chart class="center-chart" type="bar" data="[[_coloredBarChartData(articleRegions)]]" options="[[_hideLegend()]]">
+        <google-chart class="center-chart" type="column" data="[[_coloredBarChartData(articleRegions)]]" options="[[_hideLegend()]]">
         </google-chart>
       </div>
     </paper-card>
@@ -99,49 +101,38 @@ Example:
     </paper-card>
 
 
-    <!-- File types --------------------------------------------------->
+    <!-- Types --------------------------------------------------->
     <!-- TODO: filter deleted files; it requires a "must_not" predicate
          for ES; nuxeo-es-query does not support this OOTB. -->
 
-    <!-- Pictures -->
-    <nuxeo-repository-data ecm-primary-type="Picture" where='[{"term": {"ecm:isVersion": "false"}}]' grouped-by="picture:info.format" data="{{pictureTypes}}">
-    </nuxeo-repository-data>
-    <paper-card class="dashboard-widget-header-03" heading="Picture Types" elevation="2">
-      <div class="card-content">
-        <google-chart class="center-chart" type="column" data="[[_coloredBarChartData(pictureTypes)]]" options="[[_hideLegend()]]">
-        </google-chart>
-      </div>
-    </paper-card>
 
-    <!-- Videos -->
-    <!-- Note that _prettyRows is used because Nuxeo doesn't have a useful
-         field for the video"type". For example there is vid:info.format
-         but it contains a list of types, not a single type. There is
-         picture:info.format but, for example, the format of an MP4 is
-         JPEG. And dc:format is null. -->
-    <nuxeo-repository-data ecm-primary-type="Video" where='[{"term": {"ecm:isVersion": "false"}}]' grouped-by="file:content.mime-type" data="{{videoTypes}}">
-    </nuxeo-repository-data>
-
-    <paper-card class="dashboard-widget-header-03" heading="Video Types" elevation="2">
-      <div class="card-content">
-        <google-chart class="center-chart" type="pie" cols='[{"label": "Type", "type": "string"},{"label": "Value", "type": "number"}]' rows="[[_prettyRows(videoTypes)]]">
-        </google-chart>
-      </div>
-    </paper-card>
-
-    <!-- Files -->
-    <!-- Note that _prettyRows is used because Nuxeo doesn't have a useful
-         field for the file"type". -->
-    <nuxeo-repository-data ecm-primary-type="File" grouped-by="file:content.mime-type" data="{{typeCount}}">
+    <!-- Documents -->
+    <nuxeo-repository-data where='[{"term": {"ecm:isVersion": "false"}}]' grouped-by="ecm:primaryType" data="{{pictureTypes}}">
     </nuxeo-repository-data>
     <paper-card class="dashboard-widget-header-03" heading="Document Types" elevation="2">
+      <div class="card-content">
+        <google-chart class="center-chart" type="bar" data="[[_coloredBarChartData(pictureTypes)]]" options="[[_hideLegend()]]">
+        </google-chart>
+      </div>
+    </paper-card>
+
+
+    <!-- Files -->
+    <!-- Note that _prettyRows is used because Nuxeo only provides MIME type. -->
+    <nuxeo-repository-data grouped-by="file:content.mime-type" data="{{typeCount}}">
+    </nuxeo-repository-data>
+    <paper-card class="dashboard-widget-header-03" heading="File Types" elevation="2">
       <div class="card-content">
         <google-chart class="center-chart" type="pie" cols='[{"label": "Type", "type": "string"},{"label": "Value", "type": "number"}]' rows="[[_prettyRows(typeCount)]]">
         </google-chart>
       </div>
     </paper-card>
 
-    <!-- AcknowledgeRead --------------------------------------------------->
+
+    <!-- Workflow --------------------------------------------------->
+
+
+    <!-- AcknowledgeRead -->
     <!-- Total workflows started by each user -->
     <nuxeo-workflow-data workflow="AcknowledgeRead" event="afterWorkflowStarted" grouped-by="workflowInitiator" start-date="[[startDate]]" end-date="[[endDate]]" data="{{initiators_AcknowledgeRead}}">
     </nuxeo-workflow-data>
@@ -165,7 +156,7 @@ Example:
     </paper-card>
 
 
-    <!-- SerialDocumentReview --------------------------------------------------->
+    <!-- SerialDocumentReview -->
     <!-- Total workflows started by each user -->
     <nuxeo-workflow-data workflow="SerialDocumentReview" event="afterWorkflowStarted" grouped-by="workflowInitiator" start-date="[[startDate]]" end-date="[[endDate]]" data="{{initiators_SerialDocumentReview}}">
     </nuxeo-workflow-data>
