@@ -22,7 +22,7 @@ Contributors:
 <link rel="import" href="../bower_components/nuxeo-dataviz-elements/nuxeo-audit-data.html">
 <link rel="import" href="../bower_components/nuxeo-dataviz-elements/nuxeo-search-data.html">
 <link rel="import" href="../bower_components/nuxeo-util-mimetypes/nuxeo-util-mimetypes.html">
-<link rel="import" href="nuxeo-dam-dashboard-downloads-table.html">
+<link rel="import" href="nuxeo-data-table.html">
 <!--
 An element providing a dashboard for the CVS demo, for testing single widgets.
 
@@ -39,7 +39,7 @@ Example:
 
 <dom-module id="cvs-dashboard-test">
 
-  <link rel="import" type="css" href="cvs-dashboard-test.css">
+  <link rel="import" type="css" href="cvs-dashboard.css">
 
   <template>
 
@@ -47,9 +47,9 @@ Example:
     <nuxeo-search-data start-date="[[startDate]]" end-date="[[endDate]]" grouped-by="searchDocumentModel.properties.defaults:ecm_fulltext" group-limit="7" data="{{callsPerFT}}" index="[[nuxeo-audit]]">
     </nuxeo-search-data>
 
-    <paper-card heading="Full text searches" elevation="2">
-      <div class="card-content">
-        <nuxeo-data-table columns='["Search term", "Number of calls"]' data="[[callsPerFT]]">
+    <paper-card class="dashboard-widget-header-02" heading="Top Search Terms" elevation="2">
+      <div class="card-content-table">
+        <nuxeo-data-table columns='["Term", "Count"]' data="[[_table(callsPerFT)]]">
         </nuxeo-data-table>
       </div>
     </paper-card>
