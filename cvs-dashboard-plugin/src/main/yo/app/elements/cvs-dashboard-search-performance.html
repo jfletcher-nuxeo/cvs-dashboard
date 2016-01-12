@@ -16,68 +16,82 @@ Contributors:
 -->
 <link rel="import" href="../bower_components/nuxeo-dataviz-elements/nuxeo-es-search.html">
 <!--
-
+  An element that returns the worst performing keyword searches.
 -->
 <dom-module id="cvs-dashboard-search-performance" include="shared-styles">
 
   <template>
 
 
-    <nuxeo-es-search auto="true" query=[[_query()]] size="20" aggregates=[[_aggs()]] index="audit" hits="{{data}}">
+    <nuxeo-es-search auto="true" query="[[_query()]]" size="0" aggregates="[[_aggs()]]" index="audit" hits="{{docHits}}" aggregations="{{docAggregations}}">
     </nuxeo-es-search>
 
-    <span>[[_debug(data)]]</span>
 
   </template>
 
   <script>
     Polymer({
+
       is: 'cvs-dashboard-search-performance',
-      // Expose properties
+
       properties: {
-        data: {
+        docHits: {
           type: Object,
           notify: true
         },
-        query: {
-          type: Object,
-          notify: true
-        },
-        aggregates: {
+        docAggregations: {
           type: Object,
           notify: true
         }
       },
 
 
-
-      _update: function () {
-
-        this.debounce('autoQuery', function () {
-          this.$.perfMetrics.execute();
-        }.bind(this), 200);
-
-      },
-
+      // Search for audit events that have a value in the keywords field.
       _query: function () {
         this.query = {
-          match: {
-            "pageProviderName": "ArticlesSearch"
+          "filtered": {
+            "filter": {
+              "exists": {
+                "field": "extended.searchDocumentModel.properties.ArticlesSearch_cv:system_fulltext"
+              }
+            },
+            "query": {
+              match: {
+                "pageProviderName": "ArticlesSearch"
+              }
+            }
           }
+
         };
+
 
         return this.query;
       },
 
+      // Aggregate by number of results, ascending.
+      // Then keywords sorted by most used.
       _aggs: function () {
-
         this.aggregates = {
-          "by": {
+          "results": {
             "terms": {
-              "field": "searchDocumentModel.properties.ArticlesSearch_cv:system_fulltext"
+              "field": "resultsCount",
+              "order": {
+                "_term": "asc"
+              },
+              "size": 7,
+              "collect_mode": "breadth_first"
+            },
+            "aggs": {
+              "keywords": {
+                "terms": {
+                  "field": "ArticlesSearch_cv:system_fulltext",
+                  size: 1
+                }
+              }
             }
           }
         };
+
         return this.aggregates;
       },
 
