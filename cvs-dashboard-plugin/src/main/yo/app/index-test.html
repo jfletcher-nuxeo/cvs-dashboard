@@ -81,7 +81,7 @@ Contributors:
   <template is="dom-bind" id="app">
 
     <!-- Define a connection to our Nuxeo server -->
-    <nuxeo-connection url="/nuxeo"></nuxeo-connection>
+    <nuxeo-connection url="http://cvs.cloud.nuxeo.com/nuxeo" username="Administrator" password="Administrator"></nuxeo-connection>
 
     <paper-header-panel>
       <paper-toolbar>
@@ -95,8 +95,8 @@ Contributors:
       </paper-toolbar>
 
       <!-- Include our element and specify a start and end date -->
-      <cvs-dashboard start-date="[[startDate]]" end-date="[[endDate]]">
-      </cvs-dashboard>
+      <cvs-dashboard-test start-date="[[startDate]]" end-date="[[endDate]]">
+      </cvs-dashboard-test>
 
     </paper-header-panel>
 

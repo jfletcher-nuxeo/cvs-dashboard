@@ -18,25 +18,25 @@ Contributors:
 <link rel="import" href="../bower_components/nuxeo-elements/nuxeo-page-provider.html">
 <link rel="import" href="../bower_components/iron-flex-layout/classes/iron-flex-layout.html">
 <!--
-An element for listing top downloads. At this point it's a semi-hard-coded,
-two column layout.
+An element for listing two column data. **At this point it's semi-hard-coded to
+only show downloads.**
 
-The data passed it should be from the audit index (e.g. document UUID and
-count). This element will fetch the document metadata to display the title
-or binary name.
+The difference between this and `nuxeo-data-table` is that, since you're passing
+audit data, you only have the document ID. This element will fetch the document 
+metadata to display the title or binary name.
 
 Example:
 
-    <nuxeo-dam-dashboard-downloads-table columns='[{"key": "key", "title": "File"}, {"key": "value", "title": "Downloads"}]' 
+    <nuxeo-data-table-audit columns='[{"key": "key", "title": "File"}, {"key": "value", "title": "Downloads"}]' 
                                          data="[[_table(downloads)]]">
-    </nuxeo-dam-dashboard-downloads-table>
+    </nuxeo-data-table-audit>
 
 @group Nuxeo Dashboards
-@element nuxeo-dam-dashboard-downloads-table
+@element nuxeo-data-table-audit
 -->
-<dom-module id="nuxeo-dam-dashboard-downloads-table">
+<dom-module id="nuxeo-data-table-audit">
 
-  <link rel="import" type="css" href="nuxeo-dam-dashboard-downloads-table.css" />
+  <link rel="import" type="css" href="nuxeo-data-table-audit.css" />
 
   <template>
 
@@ -76,7 +76,7 @@ Example:
   <script>
     Polymer({
 
-      is: 'nuxeo-dam-dashboard-downloads-table',
+      is: 'nuxeo-data-table-audit',
 
       properties: {
         data: {

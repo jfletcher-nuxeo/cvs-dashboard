@@ -1,0 +1,235 @@
+<!--
+(C) Copyright 2015 Nuxeo SA (http://nuxeo.com/) and contributors.
+
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the GNU Lesser General Public License
+(LGPL) version 2.1 which accompanies this distribution, and is available at
+http://www.gnu.org/licenses/lgpl.html
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+Lesser General Public License for more details.
+
+Contributors:
+  Josh Fletcher <jfletcher@nuxeo.com>
+-->
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../bower_components/iron-icons/image-icons.html">
+<link rel="import" href="../bower_components/google-chart/google-chart.html">
+<link rel="import" href="../bower_components/nuxeo-dataviz-elements/nuxeo-dataviz-elements.html">
+<link rel="import" href="../bower_components/nuxeo-dataviz-elements/nuxeo-audit-data.html">
+<link rel="import" href="../bower_components/nuxeo-dataviz-elements/nuxeo-search-data.html">
+<link rel="import" href="../bower_components/nuxeo-util-mimetypes/nuxeo-util-mimetypes.html">
+<link rel="import" href="nuxeo-data-table.html">
+<link rel="import" href="cvs-dashboard-search-performance.html">
+<!--
+An element providing a dashboard for the CVS demo, for testing single widgets.
+
+Example:
+
+    <cvs-dashboard-test start-date="2015-01-01"
+                      end-date="2015-12-31">
+    </cvs-dashboard-test>
+
+@group Nuxeo Dashboards
+@element cvs-dashboard-test
+@demo demo/index.html
+-->
+
+<dom-module id="cvs-dashboard-test">
+
+  <link rel="import" type="css" href="cvs-dashboard.css">
+
+  <template>
+
+
+    <!-- Result ranges -->
+    <cvs-dashboard-search-performance hits="{{callPerNumberOfResults}}"></cvs-dashboard-search-performance>
+
+    <paper-card class="dashboard-widget-header-02" heading="Lowest results" elevation="2">
+      <div class="card-content-table">
+        <nuxeo-data-table columns='["Term", "Results"]' data="[[_tableWithAggs(callPerNumberOfResults)]]">
+        </nuxeo-data-table>
+      </div>
+    </paper-card>
+
+
+  </template>
+
+  <!---------------------------------------------------------------------------------------------------------->
+
+  <script>
+    Polymer({
+      is: 'cvs-dashboard-test',
+
+      properties: {
+        startDate: String,
+        endDate: String,
+        callPerNumberOfResults: {
+          type: Object,
+          notify: true
+        }
+      },
+
+      // Return JSON object to hide the legend in a Google chart.
+      _hideLegend: function () {
+        return {
+          legend: 'none',
+        }
+      },
+
+      // Transform our data for usage with Google Charts
+      // Change ES aggregate object to array data for bar chart.
+      // Since this is only one series, color is changed per bar.
+      _coloredBarChartData: function (nuxeoData) {
+        var colorArray = this._getColorArray();
+        var result = nuxeoData.map(function (e, index) {
+          return [e.key, e.value, colorArray[index]];
+        });
+
+        // Insert headers.
+        result.splice(0, 0, ["Item", "Value", {
+          role: 'style'
+        }]);
+
+        return result;
+      },
+
+      observers: [
+        '_tableWithAggs(callPerNumberOfResults)'
+      ],
+
+      // Convert to the format expected by the "data" parameter of Google Charts.
+      _data: function (nuxeoData) {
+        var result = nuxeoData.map(function (e) {
+          return [e.key, e.value];
+        });
+        result.splice(0, 0, ["Categories", "Value"]);
+        return result;
+      },
+
+
+      _rows: function (data) {
+        return data.map(function (e) {
+          return [e.key, e.value];
+        });
+      },
+
+
+      _incidentBetween: function (start, end) {
+        return [{
+          'range': {
+            'incl:incident_date': {
+              'gte': start,
+              'lte': end
+            }
+          }
+         }];
+      },
+
+
+      _asDuration: function (duration) {
+        var seconds = Math.floor(duration / 1000),
+          minutes = Math.floor(seconds / 60),
+          hours = Math.floor(minutes / 60),
+          days = Math.floor(hours / 24),
+          hours = hours - (days * 24),
+          minutes = minutes - (days * 24 * 60) - (hours * 60),
+          seconds = seconds - (days * 24 * 60 * 60) - (hours * 60 * 60) - (minutes * 60),
+          result = "";
+        if (days > 0) {
+          result += days + " Days ";
+        }
+        if (hours > 0) {
+          result += hours + " h ";
+        }
+        if (minutes > 0) {
+          result += minutes + " m ";
+        }
+        if (seconds > 0) {
+          result += seconds + " s ";
+        }
+        return result;
+      },
+
+      // produces a table with "Label", "Parent", "Value"] for usage in a treemap
+      _treeFor: function (data, separator) {
+        var separator = separator || '/',
+          res = [["", "Parent", "Value"], ["All", null, 0]],
+          parents = {}; // aggregate results in the parent
+        data.forEach(function (e) {
+          var parts = e.key.split(separator),
+            parentKey = parts[0],
+            key = parts[1];
+          res.push([key, parentKey, e.value]);
+
+          if (!parents[parentKey]) {
+            parents[parentKey] = e.value;
+          } else {
+            parents[parentKey] += e.value;
+          }
+        });
+
+        for (var key in parents) {
+          res.push([key, "All", parents[key]]);
+        }
+        return res;
+      },
+
+      _table: function (data) {
+        return data.map(function (e) {
+          return {
+            key: e.key,
+            value: e.value
+          };
+        }.bind(this));
+      },
+
+      _tableWithAggs: function (data) {
+        return data.map(function (e) {
+          return {
+            key: e.key,
+            value: e.value[0].key
+          };
+        }.bind(this));
+      },
+
+      // Convert the MIME Type so something more friendly for the user.
+      _convertMimeType: function (mimeType, friendly) {
+        var mimeTypeLookup = document.createElement('nuxeo-util-mimetypes');
+        mimeTypeLookup.mimeType = mimeType;
+        mimeTypeLookup.friendly = friendly;
+        return mimeTypeLookup.query();
+      },
+
+      // Instead of just returning the rows (using _rows), convert the MIME Types to something more friendly.
+      _prettyRows: function (data) {
+        for (var i = 0; i < data.length; i++) {
+          var mimeType = data[i].key;
+          var friendlyName = this._convertMimeType(mimeType, 'true')
+          if (friendlyName) {
+            data[i].key = friendlyName;
+          } else {
+            var fileExts = this._convertMimeType(mimeType);
+            if (fileExts) {
+              data[i].key = fileExts;
+            }
+          }
+        }
+        return this._rows(data);
+      },
+
+      _getAuditIndexName: function () {
+        return "nuxeo-audit";
+      },
+
+      // These are the default colors using by Google Charts.
+      _getColorArray: function () {
+        return ["#3366cc", "#dc3912", "#ff9900", "#109618", "#990099", "#0099c6", "#dd4477", "#66aa00", "#b82e2e", "#316395", "#994499", "#22aa99", "#aaaa11", "#6633cc", "#e67300", "#8b0707", "#651067", "#329262", "#5574a6", "#3b3eac", "#b77322", "#16d620", "#b91383", "#f4359e", "#9c5935", "#a9c413", "#2a778d", "#668d1c", "#bea413", "#0c5922", "#743411"]
+      }
+    })
+  </script>
+
+</dom-module>
