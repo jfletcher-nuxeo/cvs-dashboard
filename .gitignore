@@ -5,3 +5,5 @@ bower_components
 .publish/
 .idea
 target
+
+.project
