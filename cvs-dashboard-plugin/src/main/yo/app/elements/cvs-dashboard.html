@@ -50,7 +50,7 @@ Example:
     -->
     <cvs-dashboard-search-performance doc-aggregations="{{docAggregations}}"></cvs-dashboard-search-performance>
 
-    <paper-card class="dashboard-widget-header-02" heading="Lowest results" elevation="2">
+    <paper-card class="dashboard-widget-header-02" heading="Searches with Fewest Results" elevation="2">
       <div class="card-content-table">
         <nuxeo-data-table columns='["Term", "Result Count"]' data="[[_tableWithAggs(docAggregations.results.buckets)]]">
         </nuxeo-data-table>
@@ -62,7 +62,7 @@ Example:
     <nuxeo-search-data start-date="[[startDate]]" end-date="[[endDate]]" grouped-by="searchDocumentModel.properties.ArticlesSearch_cv:system_fulltext" group-limit="7" data="{{callsPerFT}}" index="[[_getAuditIndexName]]">
     </nuxeo-search-data>
 
-    <paper-card class="dashboard-widget-header-02" heading="Top Search Terms" elevation="2">
+    <paper-card class="dashboard-widget-header-02" heading="Most Popular Searches" elevation="2">
       <div class="card-content-table">
         <nuxeo-data-table columns='["Term", "Searches"]' data="[[_table(callsPerFT)]]">
         </nuxeo-data-table>
@@ -74,7 +74,7 @@ Example:
     <nuxeo-audit-data event-id="download" grouped-by="docUUID" group-limit="7" start-date="[[startDate]]" end-date="[[endDate]]" data="{{downloads}}">
     </nuxeo-audit-data>
 
-    <paper-card class="dashboard-widget-header-01" heading="Top Downloads" elevation="2">
+    <paper-card class="dashboard-widget-header-01" heading="Most Downloaded Articles" elevation="2">
       <div class="card-content-table">
         <nuxeo-data-table-audit columns='[{"key": "key", "title": "Article"}, {"key": "value", "title": "Downloads"}]' data="[[_table(downloads)]]">
         </nuxeo-data-table-audit>
