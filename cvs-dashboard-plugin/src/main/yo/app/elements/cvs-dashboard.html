@@ -44,6 +44,18 @@ Example:
   <template>
 
 
+    <!-- Top Search Terms --------------------------------------------------->
+    <nuxeo-search-data start-date="[[startDate]]" end-date="[[endDate]]" grouped-by="searchDocumentModel.properties.ArticlesSearch_cv:system_fulltext" group-limit="7" data="{{callsPerFT}}" index="[[_getAuditIndexName]]">
+    </nuxeo-search-data>
+
+    <paper-card class="dashboard-widget-header-02" heading="Top Search Terms" elevation="2">
+      <div class="card-content-table">
+        <nuxeo-data-table columns='["Term", "Count"]' data="[[_table(callsPerFT)]]">
+        </nuxeo-data-table>
+      </div>
+    </paper-card>
+
+
     <!-- Top Downloads --------------------------------------------------->
     <nuxeo-audit-data event-id="download" grouped-by="docUUID" group-limit="7" start-date="[[startDate]]" end-date="[[endDate]]" data="{{downloads}}">
     </nuxeo-audit-data>
