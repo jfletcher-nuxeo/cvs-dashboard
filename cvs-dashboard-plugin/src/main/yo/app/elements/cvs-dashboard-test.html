@@ -23,6 +23,7 @@ Contributors:
 <link rel="import" href="../bower_components/nuxeo-dataviz-elements/nuxeo-search-data.html">
 <link rel="import" href="../bower_components/nuxeo-util-mimetypes/nuxeo-util-mimetypes.html">
 <link rel="import" href="nuxeo-data-table.html">
+<link rel="import" href="cvs-dashboard-search-performance.html">
 <!--
 An element providing a dashboard for the CVS demo, for testing single widgets.
 
@@ -45,17 +46,11 @@ Example:
 
 
     <!-- Result ranges -->
-    <nuxeo-search-data start-date="[[startDate]]" end-date="[[endDate]]" with-ranges='{"resultsCount":[
-                     {"key": "no result", "to": 1 },
-                     {"key": "less than 50", "from" : 1, "to": 50},
-                     {"key": "between 51 and 200", "from" : 51, "to": 200 },
-                     {"key": "between 200 and 1000", "from" : 201, "to": 1000},
-                     {"key": "more than 1000", "from" : 1001 }]}' data="{{callPerNumberOfResults}}" index="[[_getAuditIndexName]]">
-    </nuxeo-search-data>
+    <cvs-dashboard-search-performance hits="{{callPerNumberOfResults}}"></cvs-dashboard-search-performance>
 
-    <paper-card class="dashboard-widget-header-02" heading="Number of results" elevation="2">
+    <paper-card class="dashboard-widget-header-02" heading="Lowest results" elevation="2">
       <div class="card-content-table">
-        <nuxeo-data-table data="[[callPerNumberOfResults]]">
+        <nuxeo-data-table columns='["Term", "Results"]' data="[[_tableWithAggs(callPerNumberOfResults)]]">
         </nuxeo-data-table>
       </div>
     </paper-card>
@@ -71,7 +66,11 @@ Example:
 
       properties: {
         startDate: String,
-        endDate: String
+        endDate: String,
+        callPerNumberOfResults: {
+          type: Object,
+          notify: true
+        }
       },
 
       // Return JSON object to hide the legend in a Google chart.
@@ -98,6 +97,9 @@ Example:
         return result;
       },
 
+      observers: [
+        '_tableWithAggs(callPerNumberOfResults)'
+      ],
 
       // Convert to the format expected by the "data" parameter of Google Charts.
       _data: function (nuxeoData) {
@@ -181,6 +183,15 @@ Example:
           return {
             key: e.key,
             value: e.value
+          };
+        }.bind(this));
+      },
+
+      _tableWithAggs: function (data) {
+        return data.map(function (e) {
+          return {
+            key: e.key,
+            value: e.value[0].key
           };
         }.bind(this));
       },
