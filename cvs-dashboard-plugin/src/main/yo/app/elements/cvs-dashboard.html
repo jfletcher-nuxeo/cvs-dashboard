@@ -50,7 +50,7 @@ Example:
 
     <paper-card class="dashboard-widget-header-02" heading="Top Search Terms" elevation="2">
       <div class="card-content-table">
-        <nuxeo-data-table columns='["Term", "Count"]' data="[[_table(callsPerFT)]]">
+        <nuxeo-data-table columns='["Term", "Searches"]' data="[[_table(callsPerFT)]]">
         </nuxeo-data-table>
       </div>
     </paper-card>
@@ -337,6 +337,10 @@ Example:
           }
         }
         return this._rows(data);
+      },
+
+      _getAuditIndexName: function () {
+        return "nuxeo-audit";
       },
 
       // These are the default colors using by Google Charts.
