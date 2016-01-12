@@ -63,11 +63,12 @@ Example:
     </nuxeo-search-data>
 
     <paper-card class="dashboard-widget-header-02" heading="Most Popular Searches" elevation="2">
-      <div class="card-content-table">
-        <nuxeo-data-table columns='["Term", "Searches"]' data="[[_table(callsPerFT)]]">
-        </nuxeo-data-table>
+      <div class="card-content">
+        <google-chart class="center-chart" type="bar" data="[[_coloredBarChartData(callsPerFT)]]" options="[[_hideLegend()]]">
+        </google-chart>
       </div>
     </paper-card>
+
 
 
     <!-- Top Downloads --------------------------------------------------->
