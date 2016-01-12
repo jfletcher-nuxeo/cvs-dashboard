@@ -23,6 +23,7 @@ Contributors:
 <link rel="import" href="../bower_components/nuxeo-dataviz-elements/nuxeo-search-data.html">
 <link rel="import" href="../bower_components/nuxeo-util-mimetypes/nuxeo-util-mimetypes.html">
 <link rel="import" href="nuxeo-data-table-audit.html">
+<link rel="import" href="cvs-dashboard-search-performance.html">
 <!--
 An element providing a dashboard for the CVS demo.
 
@@ -42,6 +43,19 @@ Example:
   <link rel="import" type="css" href="cvs-dashboard.css">
 
   <template>
+
+    <!-- 
+      The top search terms that returned low results.
+      Note that I limited it to only one set of keywords per result count, otherwise you get junk searches.
+    -->
+    <cvs-dashboard-search-performance doc-aggregations="{{docAggregations}}"></cvs-dashboard-search-performance>
+
+    <paper-card class="dashboard-widget-header-02" heading="Lowest results" elevation="2">
+      <div class="card-content-table">
+        <nuxeo-data-table columns='["Term", "Result Count"]' data="[[_tableWithAggs(docAggregations.results.buckets)]]">
+        </nuxeo-data-table>
+      </div>
+    </paper-card>
 
 
     <!-- Top Search Terms --------------------------------------------------->
@@ -315,6 +329,15 @@ Example:
           }
         }
         return this._rows(data);
+      },
+
+      _tableWithAggs: function (data) {
+        return data.map(function (e) {
+          return {
+            key: e.keywords.buckets[0].key,
+            value: e.key
+          };
+        }.bind(this));
       },
 
       _getAuditIndexName: function () {
