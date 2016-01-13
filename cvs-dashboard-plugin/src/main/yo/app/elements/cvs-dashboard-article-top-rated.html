@@ -16,7 +16,7 @@ Contributors:
 -->
 <link rel="import" href="../bower_components/nuxeo-dataviz-elements/nuxeo-es-search.html">
 <!--
-  An element that returns the worst performing keyword searches.
+  An element that returns the highest rated articles.
 -->
 <dom-module id="cvs-dashboard-article-top-rated">
 
@@ -46,7 +46,7 @@ Contributors:
         docOrder: String
       },
 
-      // Search for audit events that have a value in the keywords field.
+
       _query: function () {
         this.query = {
           "bool": {
