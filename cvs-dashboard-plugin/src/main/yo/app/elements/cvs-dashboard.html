@@ -370,6 +370,7 @@ Example:
 
 
       _tableForRatings: function (data) {
+        data = data.slice(0, 7)
         return data.map(function (e) {
           return {
             key: e.key,
