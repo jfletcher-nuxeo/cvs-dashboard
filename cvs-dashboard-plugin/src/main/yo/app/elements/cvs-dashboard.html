@@ -49,11 +49,11 @@ Example:
       The top search terms that returned low results.
       Note that I limited it to only one set of keywords per result count, otherwise you get junk searches.
     -->
-    <cvs-dashboard-search-performance doc-aggregations="{{docAggregations}}"></cvs-dashboard-search-performance>
+    <cvs-dashboard-search-performance doc-aggregations="{{seachPerfData}}"></cvs-dashboard-search-performance>
 
     <paper-card class="dashboard-widget-header-02" heading="Searches with Fewest Results" elevation="2">
       <div class="card-content-table">
-        <nuxeo-data-table columns='["Term", "Result Count"]' data="[[_tableWithAggs(docAggregations.results.buckets)]]">
+        <nuxeo-data-table columns='["Term", "Result Count"]' data="[[_tableForSearchPerf(seachPerfData.results.buckets)]]">
         </nuxeo-data-table>
       </div>
     </paper-card>
@@ -343,7 +343,7 @@ Example:
         return this._rows(data);
       },
 
-      _tableWithAggs: function (data) {
+      _tableForSearchPerf: function (data) {
         return data.map(function (e) {
           return {
             key: e.keywords.buckets[0].key,
