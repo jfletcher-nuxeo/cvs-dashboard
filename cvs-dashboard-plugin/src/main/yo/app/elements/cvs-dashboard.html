@@ -26,6 +26,7 @@ Contributors:
 <link rel="import" href="cvs-dashboard-search-performance.html">
 <link rel="import" href="cvs-dashboard-article-top-rated.html">
 <link rel="import" href="cvs-dashboard-article-worst-rated.html">
+<link rel="import" href="cvs-dashboard-unread-by-group.html">
 <link rel="import" href="nuxeo-data-table-stars.html">
 <!--
 An element providing a dashboard for the CVS demo.
@@ -69,6 +70,17 @@ Example:
       <div class="card-content">
         <google-chart class="center-chart" type="bar" data="[[_coloredBarChartData(callsPerFT)]]" options="[[_hideLegend()]]">
         </google-chart>
+      </div>
+    </paper-card>
+
+
+    <!-- Unread by Department --------------------------------------------------->
+    <cvs-dashboard-unread-by-group doc-aggregations="{{unreadDocs}}"> </cvs-dashboard-unread-by-group>
+
+    <paper-card class="dashboard-widget-header-02" heading="Most Unread by User" elevation="2">
+      <div class="card-content-table">
+        <nuxeo-data-table columns='["User", "Count"]' data="[[_tableForUnread(unreadDocs.by.buckets)]]">
+        </nuxeo-data-table>
       </div>
     </paper-card>
 
@@ -372,6 +384,15 @@ Example:
             key: e.key,
             value: Math.round(e.avgVote.value),
             count: e.doc_count
+          };
+        }.bind(this));
+      },
+
+      _tableForUnread: function (data) {
+        return data.map(function (e) {
+          return {
+            key: e.key,
+            value: e.doc_count
           };
         }.bind(this));
       },
