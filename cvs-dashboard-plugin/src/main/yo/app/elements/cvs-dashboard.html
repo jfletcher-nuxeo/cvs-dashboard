@@ -79,9 +79,9 @@ Example:
     <!-- Unread by Department --------------------------------------------------->
     <cvs-dashboard-unread-by-group doc-aggregations="{{unreadDocs}}"> </cvs-dashboard-unread-by-group>
 
-    <paper-card class="dashboard-widget-header-01" heading="Most Unread by User" elevation="2">
+    <paper-card class="dashboard-widget-header-01" heading="Most Unread by Region" elevation="2">
       <div class="card-content-table">
-        <nuxeo-data-table columns='["User", "Count"]' data="[[_tableForUnread(unreadDocs.by.buckets)]]">
+        <nuxeo-data-table columns='["Region", "Count"]' data="[[_tableForUnread(unreadDocs.by.buckets)]]">
         </nuxeo-data-table>
       </div>
     </paper-card>
