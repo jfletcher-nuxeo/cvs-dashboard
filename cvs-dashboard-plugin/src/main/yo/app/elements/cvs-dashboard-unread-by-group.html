@@ -46,7 +46,6 @@ Contributors:
       },
 
 
-      // Search for audit events that have a value in the keywords field.
       _query: function () {
         this.query = {
           "bool": {
@@ -65,8 +64,7 @@ Contributors:
         return this.query;
       },
 
-      // Aggregate by number of results, ascending.
-      // Then keywords sorted by most used.
+
       _aggs: function () {
         this.aggregates = {
           "by": {

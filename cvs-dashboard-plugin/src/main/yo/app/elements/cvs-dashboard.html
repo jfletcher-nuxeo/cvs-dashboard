@@ -77,7 +77,7 @@ Example:
     <!-- Unread by Department --------------------------------------------------->
     <cvs-dashboard-unread-by-group doc-aggregations="{{unreadDocs}}"> </cvs-dashboard-unread-by-group>
 
-    <paper-card class="dashboard-widget-header-02" heading="Most Unread by User" elevation="2">
+    <paper-card class="dashboard-widget-header-01" heading="Most Unread by User" elevation="2">
       <div class="card-content-table">
         <nuxeo-data-table columns='["User", "Count"]' data="[[_tableForUnread(unreadDocs.by.buckets)]]">
         </nuxeo-data-table>
@@ -103,18 +103,6 @@ Example:
       <div class="card-content-table">
         <nuxeo-data-table-stars columns='["Article", "Rating (Votes)"]' data="[[_tableForRatings(worstRatedData.votesPerDoc.buckets)]]">
         </nuxeo-data-table-stars>
-      </div>
-    </paper-card>
-
-
-    <!-- Top Downloads --------------------------------------------------->
-    <nuxeo-audit-data event-id="download" grouped-by="docUUID" group-limit="7" start-date="[[startDate]]" end-date="[[endDate]]" data="{{downloads}}">
-    </nuxeo-audit-data>
-
-    <paper-card class="dashboard-widget-header-01" heading="Most Downloaded Articles" elevation="2">
-      <div class="card-content-table">
-        <nuxeo-data-table-audit columns='[{"key": "key", "title": "Article"}, {"key": "value", "title": "Downloads"}]' data="[[_table(downloads)]]">
-        </nuxeo-data-table-audit>
       </div>
     </paper-card>
 
