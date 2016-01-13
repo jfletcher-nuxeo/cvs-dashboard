@@ -235,6 +235,7 @@ module.exports = function (grunt) {
             '*.{ico,txt}',
             '.htaccess',
             '*.html',
+            'bower_components/**',
             'elements/**',
             '!elements/**/*.css',
             'images/**'
@@ -276,7 +277,6 @@ module.exports = function (grunt) {
     'autoprefixer',
     'uglify',
     'cssmin',
-    'vulcanize',
     'usemin',
     'minifyHtml'
   ]);
