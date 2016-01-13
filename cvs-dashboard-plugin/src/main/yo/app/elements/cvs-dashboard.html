@@ -50,6 +50,19 @@ Example:
 
   <template>
 
+
+    <!-- Top Search Terms --------------------------------------------------->
+    <nuxeo-search-data start-date="[[startDate]]" end-date="[[endDate]]" grouped-by="searchDocumentModel.properties.ArticlesSearch_cv:system_fulltext" group-limit="10" data="{{callsPerFT}}" index="[[_getAuditIndexName]]">
+    </nuxeo-search-data>
+
+    <paper-card class="dashboard-widget-header-02" heading="Most Popular Searches" elevation="2">
+      <div class="card-content">
+        <google-chart class="center-chart" type="bar" data="[[_coloredBarChartData(callsPerFT)]]" options="[[_hideLegend()]]">
+        </google-chart>
+      </div>
+    </paper-card>
+
+
     <!-- 
       The top search terms that returned low results.
       Note that I limited it to only one set of keywords per result count, otherwise you get junk searches.
@@ -60,18 +73,6 @@ Example:
       <div class="card-content-table">
         <nuxeo-data-table columns='["Term", "Result Count"]' data="[[_tableForSearchPerf(seachPerfData.results.buckets)]]">
         </nuxeo-data-table>
-      </div>
-    </paper-card>
-
-
-    <!-- Top Search Terms --------------------------------------------------->
-    <nuxeo-search-data start-date="[[startDate]]" end-date="[[endDate]]" grouped-by="searchDocumentModel.properties.ArticlesSearch_cv:system_fulltext" group-limit="10" data="{{callsPerFT}}" index="[[_getAuditIndexName]]">
-    </nuxeo-search-data>
-
-    <paper-card class="dashboard-widget-header-02" heading="Most Popular Searches" elevation="2">
-      <div class="card-content">
-        <google-chart class="center-chart" type="bar" data="[[_coloredBarChartData(callsPerFT)]]" options="[[_hideLegend()]]">
-        </google-chart>
       </div>
     </paper-card>
 
