@@ -3,14 +3,14 @@
 
   <parent>
     <groupId>org.nuxeo.cvs.demo</groupId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.2-SNAPSHOT</version>
     <artifactId>cvs-dashboard-parent</artifactId>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
   <groupId>org.nuxeo.cvs.demo</groupId>
   <artifactId>cvs-dashboard-plugin</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.0.2-SNAPSHOT</version>
   <name>Plugin for CVS Dashboard</name>
   <description>Plugin CVS Dashboard</description>
 
