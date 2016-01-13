@@ -90,7 +90,7 @@ Example:
         return data.map(function (e) {
           return {
             key: e.key,
-            value: Math.round(e.avgVote.value)
+            value: Math.round(e.avgVote.value) + " (" + e.doc_count + ")"
           };
         }.bind(this));
       },
