@@ -26,6 +26,7 @@ Contributors:
 <link rel="import" href="cvs-dashboard-search-performance.html">
 <link rel="import" href="cvs-dashboard-article-top-rated.html">
 <link rel="import" href="cvs-dashboard-article-worst-rated.html">
+<link rel="import" href="nuxeo-data-table-stars.html">
 <!--
 An element providing a dashboard for the CVS demo.
 
@@ -77,8 +78,8 @@ Example:
 
     <paper-card class="dashboard-widget-header-01" heading="Highest Rated Articles" elevation="2">
       <div class="card-content-table">
-        <nuxeo-data-table columns='["Article", "Rating"]' data="[[_tableForHighestRated(topRatedData.votesPerDoc.buckets)]]">
-        </nuxeo-data-table>
+        <nuxeo-data-table-stars columns='["Article", "Rating (Votes)"]' data="[[_tableForRatings(topRatedData.votesPerDoc.buckets)]]">
+        </nuxeo-data-table-stars>
       </div>
     </paper-card>
 
@@ -88,8 +89,8 @@ Example:
 
     <paper-card class="dashboard-widget-header-01" heading="Lowest Rated Articles" elevation="2">
       <div class="card-content-table">
-        <nuxeo-data-table columns='["Article", "Rating"]' data="[[_tableForHighestRated(worstRatedData.votesPerDoc.buckets)]]">
-        </nuxeo-data-table>
+        <nuxeo-data-table-stars columns='["Article", "Rating (Votes)"]' data="[[_tableForRatings(worstRatedData.votesPerDoc.buckets)]]">
+        </nuxeo-data-table-stars>
       </div>
     </paper-card>
 
@@ -365,11 +366,12 @@ Example:
       },
 
 
-      _tableForHighestRated: function (data) {
+      _tableForRatings: function (data) {
         return data.map(function (e) {
           return {
             key: e.key,
-            value: Math.round(e.avgVote.value) + " (" + e.doc_count + ")"
+            value: Math.round(e.avgVote.value),
+            count: e.doc_count
           };
         }.bind(this));
       },
