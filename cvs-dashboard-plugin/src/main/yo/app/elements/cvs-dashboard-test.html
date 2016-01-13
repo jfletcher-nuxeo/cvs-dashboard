@@ -24,6 +24,8 @@ Contributors:
 <link rel="import" href="../bower_components/nuxeo-util-mimetypes/nuxeo-util-mimetypes.html">
 <link rel="import" href="nuxeo-data-table.html">
 <link rel="import" href="cvs-dashboard-search-performance.html">
+<link rel="import" href="cvs-dashboard-article-top-rated.html">
+
 <!--
 An element providing a dashboard for the CVS demo, for testing single widgets.
 
@@ -44,9 +46,31 @@ Example:
 
   <template>
 
+    <!-- Best rated --------------------------------------------------->
+    <nuxeo-repository-data ecm-primary-type="Vote" where='[{"term": {"ecm:isVersion": "false"}}]' grouped-by="vote:docTitle" data="{{articleVotes}}" metrics="avg(vote:vote)">
+    </nuxeo-repository-data>
+
+    <cvs-dashboard-article-top-rated doc-aggregations="{{docAggregations}}"></cvs-dashboard-article-top-rated>
+
+    <paper-card class="dashboard-widget-header-01" heading="Highest Rated Articles" elevation="2">
+      <div class="card-content-table">
+        <nuxeo-data-table columns='["Article", "Rating"]' data="[[_tableForHighestRated(docAggregations.votesPerDoc.buckets)]]">
+        </nuxeo-data-table>
+      </div>
+    </paper-card>
 
 
+    <!-- Most votes -------------------------------------------------
+    <nuxeo-repository-data ecm-primary-type="Vote" where='[{"term": {"ecm:isVersion": "false"}}]' grouped-by="vote:docId" data="{{articleVotes}}">
+    </nuxeo-repository-data>
 
+    <paper-card class="dashboard-widget-header-01" heading="Articles with Most Ratings" elevation="2">
+      <div class="card-content-table">
+        <nuxeo-data-table-audit columns='[{"key": "key", "title": "Article"}, {"key": "value", "title": "Rating"}]' data="[[_table(articleVotes)]]">
+        </nuxeo-data-table-audit>
+      </div>
+    </paper-card>
+-->
 
   </template>
 
@@ -62,7 +86,14 @@ Example:
       },
 
 
-
+      _tableForHighestRated: function (data) {
+        return data.map(function (e) {
+          return {
+            key: e.key,
+            value: Math.round(e.avgVote.value)
+          };
+        }.bind(this));
+      },
 
 
 
