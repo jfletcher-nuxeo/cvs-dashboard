@@ -25,6 +25,7 @@ Contributors:
 <link rel="import" href="nuxeo-data-table-audit.html">
 <link rel="import" href="cvs-dashboard-search-performance.html">
 <link rel="import" href="cvs-dashboard-article-top-rated.html">
+<link rel="import" href="cvs-dashboard-article-worst-rated.html">
 <!--
 An element providing a dashboard for the CVS demo.
 
@@ -77,6 +78,17 @@ Example:
     <paper-card class="dashboard-widget-header-01" heading="Highest Rated Articles" elevation="2">
       <div class="card-content-table">
         <nuxeo-data-table columns='["Article", "Rating"]' data="[[_tableForHighestRated(topRatedData.votesPerDoc.buckets)]]">
+        </nuxeo-data-table>
+      </div>
+    </paper-card>
+
+
+    <!-- Worst rated --------------------------------------------------->
+    <cvs-dashboard-article-worst-rated doc-aggregations="{{worstRatedData}}"></cvs-dashboard-article-worst-rated>
+
+    <paper-card class="dashboard-widget-header-01" heading="Lowest Rated Articles" elevation="2">
+      <div class="card-content-table">
+        <nuxeo-data-table columns='["Article", "Rating"]' data="[[_tableForHighestRated(worstRatedData.votesPerDoc.buckets)]]">
         </nuxeo-data-table>
       </div>
     </paper-card>
