@@ -24,6 +24,7 @@ Contributors:
 <link rel="import" href="../bower_components/nuxeo-util-mimetypes/nuxeo-util-mimetypes.html">
 <link rel="import" href="nuxeo-data-table-audit.html">
 <link rel="import" href="cvs-dashboard-search-performance.html">
+<link rel="import" href="cvs-dashboard-article-top-rated.html">
 <!--
 An element providing a dashboard for the CVS demo.
 
@@ -69,6 +70,16 @@ Example:
       </div>
     </paper-card>
 
+
+    <!-- Best rated --------------------------------------------------->
+    <cvs-dashboard-article-top-rated doc-aggregations="{{topRatedData}}"></cvs-dashboard-article-top-rated>
+
+    <paper-card class="dashboard-widget-header-01" heading="Highest Rated Articles" elevation="2">
+      <div class="card-content-table">
+        <nuxeo-data-table columns='["Article", "Rating"]' data="[[_tableForHighestRated(topRatedData.votesPerDoc.buckets)]]">
+        </nuxeo-data-table>
+      </div>
+    </paper-card>
 
 
     <!-- Top Downloads --------------------------------------------------->
@@ -340,6 +351,17 @@ Example:
           };
         }.bind(this));
       },
+
+
+      _tableForHighestRated: function (data) {
+        return data.map(function (e) {
+          return {
+            key: e.key,
+            value: Math.round(e.avgVote.value) + " (" + e.doc_count + ")"
+          };
+        }.bind(this));
+      },
+
 
       _getAuditIndexName: function () {
         return "nuxeo-audit";
