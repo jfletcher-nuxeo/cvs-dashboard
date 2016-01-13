@@ -80,10 +80,11 @@ Example:
     <!-- Unread by Department --------------------------------------------------->
     <cvs-dashboard-unread-by-group doc-aggregations="{{unreadDocs}}"> </cvs-dashboard-unread-by-group>
 
+
     <paper-card class="dashboard-widget-header-01" heading="Most Unread by Region" elevation="2">
-      <div class="card-content-table">
-        <nuxeo-data-table columns='["Region", "Count"]' data="[[_tableForUnread(unreadDocs.by.buckets)]]">
-        </nuxeo-data-table>
+      <div class="card-content">
+        <google-chart class="center-chart" type="column" data="[[_rowsForUnread(unreadDocs.by.buckets)]]" options="[[_hideLegend()]]">
+        </google-chart>
       </div>
     </paper-card>
 
@@ -387,6 +388,23 @@ Example:
             value: e.doc_count
           };
         }.bind(this));
+      },
+
+      _rowsForUnread: function (data) {
+
+        var colorArray = this._getColorArray();
+        var result = data.map(function (e, index) {
+          return [e.key, e.doc_count, colorArray[index]];
+        });
+
+        // Insert headers.
+        result.splice(0, 0, ["Item", "Value", {
+          role: 'style'
+        }]);
+
+        return result;
+
+
       },
 
 
